@@ -1,0 +1,3 @@
+function reset_migration { echo "rolling back ${1:-1} steps"; rake db:rollback STEP=${1:-1};RAILS_ENV=test rake db:rollback STEP=${1:-1}; echo 'press key     to migrate'; read answer; rake db:migrate; RAILS_ENV=test rake db:migrate; }
+  
+ function kill_by_port { lsof -i tcp:${1:-3000} | awk 'NR!=1 {print $2}' | xargs kill; }
